@@ -1,5 +1,4 @@
 // TODO: Complete this file
-
 import axios from 'axios';
 import getUserGroups from './userGroupsData';
 
