@@ -1,5 +1,6 @@
 // TODO: Complete this file
 import axios from 'axios';
+// import groupsWithUsers from '../complete';
 import getUserGroups from './userGroupsData';
 
 const dbUrl = 'https://complex-data-2a255-default-rtdb.firebaseio.com/';
@@ -16,8 +17,15 @@ const mergeGroupData = () => new Promise((resolve, reject) => {
   Promise.all([getGroups(), getUserGroups()])
     .then(([groups, userGroupsJoin]) => {
       // COMPLETE THIS FUNCTION
-      console.warn(userGroupsJoin);
-      resolve(groups);
+      const allGroupInfoArray = groups.map((group) => {
+        const groupRelationshipsArray = userGroupsJoin.filter(
+          (ug) => ug.group_id === group.id
+        );
+        return { ...group, count: groupRelationshipsArray.length };
+      });
+      // console.warn(userGroupsJoin);
+      // console.warn(allGroupInfoArray);
+      resolve(allGroupInfoArray);
     }).catch((error) => reject(error));
 });
 
