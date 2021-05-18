@@ -39,7 +39,8 @@ const groupsWithUsers = () => new Promise((resolve, reject) => {
     .then(([users, groups, userGroupsJoin]) => {
       const allGroupInfoArray = groups.map((group) => {
         const groupRelationshipsArray = userGroupsJoin.filter(
-          (ug) => ug.group_id === group.id);
+          (ug) => ug.group_id === group.id
+        );
 
         const userInfoArray = groupRelationshipsArray.map(
           (groupRelationship) => users.find((user) => user.id === groupRelationship.user_id)
